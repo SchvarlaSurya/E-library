@@ -1,0 +1,116 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=LINE+Seed+JP&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #fdfbf7;
+  --foreground: #2d2a26;
+  --accent: #8b5a2b;
+  --card-bg: #ffffff;
+  --card-border: rgba(139, 90, 43, 0.08);
+  --shadow-float: 0 20px 40px -10px rgba(139, 90, 43, 0.05);
+}
+
+.dark {
+  --background: #1c1a18;
+  --foreground: #fdfbf7;
+  --accent: #d2945d;
+  --card-bg: rgba(45, 42, 38, 0.8);
+  --card-border: rgba(253, 251, 247, 0.05);
+  --shadow-float: 0 45px 90px -25px rgba(0, 0, 0, 0.8);
+}
+
+@layer base {
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: 'Plus Jakarta Sans', 'LINE Seed JP', sans-serif;
+    @apply transition-colors duration-300 antialiased selection:bg-blue-500/30;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply backdrop-blur-xl bg-[var(--card-bg)] border border-[var(--card-border)] shadow-2xl shadow-black/5;
+  }
+
+  .premium-card {
+    @apply transition-all duration-500 rounded-[2.5rem] border border-[var(--card-border)] bg-[var(--card-bg)] backdrop-blur-lg shadow-sm hover:shadow-xl hover:shadow-black/5 hover:-translate-y-2;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-500 hover:-translate-y-3 hover:shadow-2xl hover:shadow-black/10;
+  }
+
+  .text-premium {
+    @apply tracking-tight leading-tight font-semibold;
+  }
+
+  .sidebar-glass {
+    @apply backdrop-blur-2xl bg-white/5 border-r border-white/5 shadow-2xl transition-all duration-500 ease-in-out;
+  }
+
+  .nav-link {
+    @apply flex items-center gap-4 px-6 py-4 rounded-2xl text-[11px] font-black uppercase tracking-[0.2em] transition-all duration-300 hover:bg-white/5 whitespace-nowrap overflow-hidden;
+  }
+
+  .nav-link-active {
+    @apply bg-blue-500/10 text-blue-500 shadow-lg shadow-blue-500/10;
+  }
+}
+
+.main-content {
+  @apply transition-all duration-500 ease-in-out pl-0 lg:pl-80;
+}
+
+#sidebar.sidebar-collapsed {
+  width: 6rem !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
+}
+
+#sidebar.sidebar-collapsed .nav-link {
+  @apply justify-center px-0;
+}
+
+#sidebar.sidebar-collapsed .nav-link span,
+#sidebar.sidebar-collapsed label,
+#sidebar.sidebar-collapsed .sidebar-hide-on-collapsed {
+  display: none !important;
+}
+
+#main-content-wrapper.sidebar-collapsed-padding {
+  padding-left: 6rem !important;
+}
+
+/* ANIMASI MARQUEE UNTUK E-LIBRARY */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin 8s linear infinite;
+}
